@@ -1,0 +1,40 @@
+{
+    "private": true,
+    "devDependencies": {
+        "editorconfig-checker": "^3.1.0",
+        "autoprefixer": "10.0.2",
+        "browser-sync": "2.26.13",
+        "del": "^6.0.0",
+        "gulp": "4.0.2",
+        "gulp-htmlmin": "^5.0.1",
+        "gulp-imagemin": "^7.1.0",
+        "gulp-plumber": "1.2.1",
+        "gulp-postcss": "9.0.0",
+        "gulp-rename": "^2.0.0",
+        "gulp-sass": "4.1.0",
+        "gulp-sourcemaps": "3.0.0",
+        "gulp-svgstore": "^7.0.1",
+        "gulp-typograf": "^4.0.3",
+        "gulp-uglify-es": "^2.0.0",
+        "gulp-webp": "^4.0.1",
+        "node-sass-magic-importer": "^5.3.2",
+        "postcss": "8.1.7",
+        "postcss-csso": "^5.0.0",
+        "stylelint": "^13.6.0"
+    },
+    "scripts": {
+        "editorconfig": "editorconfig-checker --exclude 'node_modules|.DS_Store|./.idea|./.github'",
+        "stylelint": "stylelint \"src/scss/**/*.scss\" --syntax scss",
+        "test": "npm run editorconfig && npm run stylelint",
+        "build": "gulp build",
+        "start": "gulp"
+    },
+    "browserslist": [
+        "last 2 versions",
+        "not dead",
+        "not ie <= 11"
+    ],
+    "engines": {
+        "node": "14.15.0"
+    }
+}
