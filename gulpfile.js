@@ -10,6 +10,7 @@ const imagemin = require("gulp-imagemin");
 const webp = require("gulp-webp");
 const svgstore = require("gulp-svgstore");
 const htmlmin = require("gulp-htmlmin");
+const typograf = require('gulp-typograf');
 const uglify = require("gulp-uglify-es").default;
 const del = require("del");
 const sync = require("browser-sync").create();
@@ -73,6 +74,7 @@ const html = () => {
     return gulp
         .src("src/*.html")
         .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(typograf({ locale: ['ru', 'en-US'], htmlEntity: { type: 'name' } }))
         .pipe(gulp.dest("build"));
 };
 
