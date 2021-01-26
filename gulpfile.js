@@ -1,6 +1,6 @@
 const gulp = require("gulp");
 const plumber = require("gulp-plumber");
-const source = require("gulp-sourcemaps");
+const sourcemap = require("gulp-sourcemaps");
 const sass = require("gulp-sass");
 const postcss = require("gulp-postcss");
 const autoprefixer = require("autoprefixer");
@@ -20,10 +20,10 @@ const styles = () => {
     return gulp
         .src("src/scss/style.scss")
         .pipe(plumber())
-        .pipe(source.init())
+        .pipe(sourcemap.init())
         .pipe(sass({importer: magicImporter()}).on("error", sass.logError))
         .pipe(postcss([autoprefixer(), csso()]))
-        .pipe(source.write("."))
+        .pipe(sourcemap.write("."))
         .pipe(rename("style.min.css"))
         .pipe(gulp.dest("build/css"))
         .pipe(sync.stream());
@@ -136,7 +136,7 @@ const reload = (done) => {
 
 // Watcher
 const watcher = () => {
-    gulp.watch("src/sass/**/*.scss", gulp.series("styles"));
+    gulp.watch("src/sass/**/*.scss", gulp.series(styles));
     gulp.watch("src/js/*.js", gulp.series(scripts));
     gulp.watch("src/*.html", gulp.series(html, reload));
     gulp.watch("src/img/**/*.svg", gulp.series(sprite, reload));
@@ -154,7 +154,7 @@ exports.build = build;
 
 exports.default = gulp.series(
     clean,
-    gulp.parallel(styles, html, copy, createWebp, scripts),
+    gulp.parallel(styles, html, scripts, copy, createWebp),
     sprite,
     gulp.series(server, watcher)
 );
